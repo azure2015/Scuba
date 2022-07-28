@@ -16,4 +16,6 @@ public class UIDisplay : MonoBehaviour
     {
         timerSlider.value = timer.GetTimer();
     }
+
+    
 }

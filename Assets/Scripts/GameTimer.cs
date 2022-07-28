@@ -17,12 +17,17 @@ public class GameTimer : MonoBehaviour
     void Update()
     {
         totalTime -= Time.deltaTime;
-        print("Timer : " + (int)totalTime);
+    ///    print("Timer : " + (int)totalTime);
 
     }
 
     public int GetTimer()
     {
         return (int)totalTime;
+    }
+
+    public void resetTimer()
+    {
+        totalTime = 100.0f;
     }
 }
