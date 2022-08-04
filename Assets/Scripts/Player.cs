@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float steerSpeed = 110f;
     [SerializeField] float moveSpeed = 3.0f;
-    [SerializeField] float rotateSpeed = 0.5f;
+    [SerializeField] float rotateSpeed = 90f;
     [SerializeField] GameTimer timerObject;
 
     private Camera mainCamera;
@@ -44,10 +44,10 @@ public class Player : MonoBehaviour
             valuePosition = Mathf.Floor(worldPosition.x - transform.position.x);
             if(valuePosition > 0)
             {
-                transform.Rotate(Vector3.back, -rotateSpeed);
+                transform.Rotate(Vector3.back, -rotateSpeed * Time.deltaTime);
             } else if (valuePosition < 0)
             {
-                transform.Rotate(Vector3.back, rotateSpeed);
+                transform.Rotate(Vector3.back, rotateSpeed * Time.deltaTime);
             }
 
             else {
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
         moveInput = movementValue.Get<Vector2>();
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag=="Bubble")
         {
