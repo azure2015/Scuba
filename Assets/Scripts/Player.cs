@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeed = 3.0f;
     [SerializeField] float rotateSpeed = 90f;
     [SerializeField] GameTimer timerObject;
+    [SerializeField] UIDisplay uiDisplay;
 
     private Camera mainCamera;
     private Rigidbody2D rb;
@@ -92,5 +93,11 @@ public class Player : MonoBehaviour
         {
             timerObject.resetTimer();
         }
+        if(other.gameObject.tag=="Collectable")
+        {
+            uiDisplay.ItemCollected();
+            Destroy(other.gameObject);
+        }
+        
     }
 }
