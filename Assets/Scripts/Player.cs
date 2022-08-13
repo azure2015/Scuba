@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private float valuePosition;
 
     private bool movePlayer = false;
+    private bool isAlive = true;
 
     private Vector2 moveInput;
     // Start is called before the first frame update
@@ -34,9 +35,20 @@ public class Player : MonoBehaviour
         var time = timerObject.GetTimer();
         if(time <= 0)
         {
-            Destroy(gameObject);
+            isAlive = false;
+            uiDisplay.PlayerLivesUpdate();
+            FindObjectOfType<GameSession>().PlayerDeath();
+          //  Destroy(gameObject);
         }
 
+        if(isAlive)
+        {
+          MovePlayer();
+        }
+    }
+
+    void MovePlayer()
+    {
         if(Touchscreen.current.primaryTouch.press.isPressed)
         {
             movePlayer = true;
@@ -55,13 +67,9 @@ public class Player : MonoBehaviour
                 movementDirection = Vector3.zero;
             }
             
-         //   rb.AddForce(transform.forward* 2);
-           // Vector3.ClampMagnitude(rb.velocity, 4.0f);
         } else 
         {
             movePlayer = false;
-            
-
         }
 
         if(!Touchscreen.current.primaryTouch.press.isPressed)
@@ -72,7 +80,6 @@ public class Player : MonoBehaviour
             transform.Translate( moveAmount,0, 0);
         }
     }
-
     void FixedUpdate() 
     {
         if(movePlayer)
@@ -97,6 +104,15 @@ public class Player : MonoBehaviour
         {
             uiDisplay.ItemCollected();
             Destroy(other.gameObject);
+        }
+
+        if(other.gameObject.tag=="Enemy")
+        {
+            Destroy(other.gameObject);
+            isAlive = false;
+            uiDisplay.PlayerLivesUpdate();
+            FindObjectOfType<GameSession>().PlayerDeath();
+            
         }
         
     }

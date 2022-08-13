@@ -10,6 +10,7 @@ public class UIDisplay : MonoBehaviour
     [SerializeField] GameTimer timer;
 
     [SerializeField] TextMeshProUGUI collectables;
+    [SerializeField] TextMeshProUGUI lives;
 
     private int TotalCollectables;
     private int Collected = 0;
@@ -17,6 +18,7 @@ public class UIDisplay : MonoBehaviour
     {
         TotalCollectables = GameObject.FindGameObjectsWithTag("Collectable").Length;
         collectables.text = "Collected : " + TotalCollectables + " / 0";
+        lives.text = $"Lives : {FindObjectOfType<GameSession>().GetLives()}";
         timerSlider.maxValue = timer.GetTimer(); 
 
     }
@@ -24,12 +26,18 @@ public class UIDisplay : MonoBehaviour
     void Update()
     {
         timerSlider.value = timer.GetTimer();
-        collectables.text = $"Collected : {TotalCollectables} / {Collected}";
+        
     }
 
     public void ItemCollected()
     {
         Collected++;
+        collectables.text = $"Collected : {TotalCollectables} / {Collected}";
+    }
+
+    public void PlayerLivesUpdate()
+    {
+        lives.text = $"Lives : {FindObjectOfType<GameSession>().GetLives()}";
     }
     
 }
