@@ -17,8 +17,8 @@ public class UIDisplay : MonoBehaviour
     void Start()
     {
         TotalCollectables = GameObject.FindGameObjectsWithTag("Collectable").Length;
-        collectables.text = "Collected : " + TotalCollectables + " / 0";
-        lives.text = $"Lives : {FindObjectOfType<GameSession>().GetLives()}";
+        collectables.text = "Collected : " +  " 0 / " + TotalCollectables;
+        PlayerLivesUpdate();
         timerSlider.maxValue = timer.GetTimer(); 
 
     }
@@ -26,13 +26,12 @@ public class UIDisplay : MonoBehaviour
     void Update()
     {
         timerSlider.value = timer.GetTimer();
-        
     }
 
     public void ItemCollected()
     {
         Collected++;
-        collectables.text = $"Collected : {TotalCollectables} / {Collected}";
+        collectables.text = $"Collected : {Collected} / {TotalCollectables}";
     }
 
     public void PlayerLivesUpdate()
