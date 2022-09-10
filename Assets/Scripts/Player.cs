@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class Player : MonoBehaviour
 {
@@ -10,11 +11,15 @@ public class Player : MonoBehaviour
     [SerializeField] float rotateSpeed = 90f;
     [SerializeField] GameTimer timerObject;
     [SerializeField] UIDisplay uiDisplay;
+    [SerializeField] List<GameObject> breakingPlayer;
+    [SerializeField] CinemachineBrain followCam;
 
     private Camera mainCamera;
     private Rigidbody2D rb;
 
     private Vector3 movementDirection;
+
+ //   private SpriteRenderer sprite;
 
     private float valuePosition;
 
@@ -22,6 +27,8 @@ public class Player : MonoBehaviour
     private bool isAlive = true;
 
     private Vector2 moveInput;
+
+    float endDelay = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,18 +39,24 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var time = timerObject.GetTimer();
-        if(time <= 0)
-        {
-            isAlive = false;
-            uiDisplay.PlayerLivesUpdate();
-            FindObjectOfType<GameSession>().PlayerDeath();
-          //  Destroy(gameObject);
-        }
-
         if(isAlive)
         {
-          MovePlayer();
+            var time = timerObject.GetTimer();
+            if(time <= 0)
+            {
+                PlayerDeath();
+              //  uiDisplay.PlayerLivesUpdate();
+            }
+            MovePlayer();
+        }
+        
+        if(!isAlive)
+        {
+            endDelay -= Time.deltaTime;
+            if(endDelay< 0)
+            {
+                 FindObjectOfType<GameSession>().PlayerDeath();
+            }
         }
     }
 
@@ -103,17 +116,30 @@ public class Player : MonoBehaviour
         if(other.gameObject.tag=="Collectable")
         {
             uiDisplay.ItemCollected();
-            Destroy(other.gameObject);
         }
 
         if(other.gameObject.tag=="Enemy")
         {
-            Destroy(other.gameObject);
-            isAlive = false;
-            uiDisplay.PlayerLivesUpdate();
-            FindObjectOfType<GameSession>().PlayerDeath();
-            
+        //    Destroy(other.gameObject);
+            PlayerDeath();
+       //     uiDisplay.PlayerLivesUpdate();
+         
         }
         
+    }
+
+    void PlayerDeath()
+    {
+        uiDisplay.PlayerLivesUpdate();
+        GetComponent<SpriteRenderer>().enabled = false;
+        isAlive = false;
+        rb.isKinematic = false;
+        followCam.enabled = false;
+        
+        foreach(GameObject part in breakingPlayer)
+        {
+                Instantiate(part,transform.position,transform.rotation);
+        }
+       
     }
 }
