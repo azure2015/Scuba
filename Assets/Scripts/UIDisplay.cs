@@ -32,6 +32,15 @@ public class UIDisplay : MonoBehaviour
     {
         Collected++;
         collectables.text = $"Collected : {Collected} / {TotalCollectables}";
+        if(IsEverythingCollected())
+        {
+            FindObjectOfType<NextLevel>().PlayParticle();
+        }
+    }
+
+    public bool IsEverythingCollected()
+    {
+        return (Collected ==TotalCollectables);
     }
 
     public void PlayerLivesUpdate()

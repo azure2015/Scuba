@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameSession : MonoBehaviour
 {
     [SerializeField] int playerLives = 3;
+    int currentLevel = 0;
     void Awake()
     {
         int numGameSession = FindObjectsOfType<GameSession>().Length;
@@ -17,6 +18,7 @@ public class GameSession : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
+        currentLevel = SceneManager.GetActiveScene().buildIndex;
     }
 
     public void PlayerDeath()
@@ -33,6 +35,19 @@ public class GameSession : MonoBehaviour
         }
     }
 
+    public IEnumerator LoadNextLevel()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        currentLevel++;
+        if(currentLevel >= SceneManager.sceneCountInBuildSettings)
+        {
+            currentLevel = 1;
+        }
+
+        SceneManager.LoadScene(currentLevel);
+    }
+
+
     void ResetGameSession()
     {
         SceneManager.LoadScene(0);
@@ -46,7 +61,8 @@ public class GameSession : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene(1);
+        currentLevel++;
+        SceneManager.LoadScene(currentLevel);
     }
 
     public void LoadMenu()

@@ -7,11 +7,9 @@ public class BreakForce : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody2D rb2D;
 
-    [SerializeField]
-    Vector2 forceDirection;
+    [SerializeField] Vector2 forceDirection;
 
-    [SerializeField]
-    float torque;
+    [SerializeField] float torque;
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();

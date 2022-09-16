@@ -25,10 +25,11 @@ public class Player : MonoBehaviour
 
     private bool movePlayer = false;
     private bool isAlive = true;
+    private bool isCreated = true;
 
     private Vector2 moveInput;
 
-    float endDelay = 2.0f;
+    float endDelay = 2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -117,28 +118,23 @@ public class Player : MonoBehaviour
         {
             uiDisplay.ItemCollected();
         }
-
-        if(other.gameObject.tag=="Enemy")
-        {
-        //    Destroy(other.gameObject);
-            PlayerDeath();
-       //     uiDisplay.PlayerLivesUpdate();
-         
-        }
         
     }
 
-    void PlayerDeath()
+    public void PlayerDeath()
     {
         uiDisplay.PlayerLivesUpdate();
         GetComponent<SpriteRenderer>().enabled = false;
         isAlive = false;
         rb.isKinematic = false;
         followCam.enabled = false;
-        
-        foreach(GameObject part in breakingPlayer)
+        if(isCreated)
         {
-                Instantiate(part,transform.position,transform.rotation);
+            foreach(GameObject part in breakingPlayer)
+            {
+                    Instantiate(part,transform.position,transform.rotation);
+            }
+        isCreated = false;
         }
        
     }
