@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UI;
 
 public class GameSession : MonoBehaviour
 {
-    [SerializeField] int playerLives = 3;
-    int currentLevel = 0;
+    [SerializeField] int playerLives;
+
+    int timerValue;
+    int currentLevel;
+
+    bool isPlaying = false;
+
     void Awake()
     {
         int numGameSession = FindObjectsOfType<GameSession>().Length;
@@ -16,24 +23,45 @@ public class GameSession : MonoBehaviour
         }
         else
         {
+ /*            if(!FindObjectOfType<Music>().isActiveAndEnabled)
+            {
+                FindObjectOfType<Music>().PlayMusic();
+            } */
             DontDestroyOnLoad(gameObject);
         }
-        currentLevel = SceneManager.GetActiveScene().buildIndex;
+     
+
+      //  currentLevel = SceneManager.GetActiveScene().buildIndex;
     }
 
-    public void PlayerDeath()
+    void OnStart() {
+        if(isPlaying ==false) {
+            
+            FindObjectOfType<Music>().PlayMusic();
+            isPlaying = true;
+            
+        }
+    }
+
+
+    public IEnumerator PlayerDeath()
     {
+        yield return new WaitForSecondsRealtime(1f);
         if(playerLives > 1)
         {
             playerLives--;
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(currentSceneIndex);
+         //   int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+         //   SceneManager.LoadScene(currentSceneIndex);
+
+            SceneManager.LoadScene(currentLevel);
         }
         else
         {
             ResetGameSession();
         }
     }
+
+    
 
     public IEnumerator LoadNextLevel()
     {
@@ -43,14 +71,24 @@ public class GameSession : MonoBehaviour
         {
             currentLevel = 1;
         }
-
         SceneManager.LoadScene(currentLevel);
     }
 
 
-    void ResetGameSession()
+    public void ResetGameSession()
     {
         SceneManager.LoadScene(0);
+        FindObjectOfType<Music>().PlayMusic();
+        Destroy(gameObject);
+    }
+
+      public void LoadIntroSession()
+    {
+        SceneManager.LoadScene(0);
+/*         if(!FindObjectOfType<Music>().isActiveAndEnabled)
+        {
+                FindObjectOfType<Music>().PlayMusic();
+        } */
         Destroy(gameObject);
     }
 
@@ -62,6 +100,7 @@ public class GameSession : MonoBehaviour
     public void LoadGame()
     {
         currentLevel++;
+        FindObjectOfType<Music>().StopMusic();
         SceneManager.LoadScene(currentLevel);
     }
 
@@ -74,5 +113,6 @@ public class GameSession : MonoBehaviour
     {
         Application.Quit();
     }
+    
 
 }

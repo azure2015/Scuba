@@ -6,13 +6,14 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 2f;
     [SerializeField] bool leftRight = true;
-    
+  
+
     Rigidbody2D enemyRigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
-        enemyRigidBody = GetComponent<Rigidbody2D>();     
+        enemyRigidBody = GetComponent<Rigidbody2D>();    
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
     }
-
+ 
     void OnTriggerEnter2D(Collider2D other) 
     {
         if(other.tag=="Background")
@@ -38,6 +39,7 @@ public class EnemyMovement : MonoBehaviour
                 transform.localScale = new Vector2(-(Mathf.Sign(enemyRigidBody.velocity.x)),1f);
             }
         }
+        
     }
 
     void OnCollisionEnter2D(Collision2D other) 

@@ -42,6 +42,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ocean
+    uniqueID: 2175567303
+    locked: 0
+  - name: Grass
+    uniqueID: 1007821819
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

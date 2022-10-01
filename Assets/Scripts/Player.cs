@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeed = 3.0f;
     [SerializeField] float rotateSpeed = 90f;
     [SerializeField] GameTimer timerObject;
-    [SerializeField] UIDisplay uiDisplay;
+    //[SerializeField] UIDisplay uiDisplay;
     [SerializeField] List<GameObject> breakingPlayer;
     [SerializeField] CinemachineBrain followCam;
 
@@ -46,7 +46,6 @@ public class Player : MonoBehaviour
             if(time <= 0)
             {
                 PlayerDeath();
-              //  uiDisplay.PlayerLivesUpdate();
             }
             MovePlayer();
         }
@@ -116,14 +115,14 @@ public class Player : MonoBehaviour
         }
         if(other.gameObject.tag=="Collectable")
         {
-            uiDisplay.ItemCollected();
+            FindObjectOfType<UIDisplay>().ItemCollected();
         }
         
     }
 
     public void PlayerDeath()
     {
-        uiDisplay.PlayerLivesUpdate();
+        StartCoroutine(FindObjectOfType<GameSession>().PlayerDeath());
         GetComponent<SpriteRenderer>().enabled = false;
         isAlive = false;
         rb.isKinematic = false;
@@ -136,6 +135,6 @@ public class Player : MonoBehaviour
             }
         isCreated = false;
         }
-       
+
     }
 }
