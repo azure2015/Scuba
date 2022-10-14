@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: WaterArt
+  m_Name: Tiles_2
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 7c753a202868eb845bc59d9196ad61fd, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 1770545054, guid: 30c6344ef29f2664681c248c3765a92f, type: 3}
+  m_Color: {r: 0.14057496, g: 0.35560092, b: 0.764151, a: 1}
   m_Transform:
     e00: 1
     e01: 0

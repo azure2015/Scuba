@@ -33,6 +33,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 2800000, guid: 28e0d1229c440f64eac075fd46fe12d7, type: 3}
+    - {fileID: 2800000, guid: 30c6344ef29f2664681c248c3765a92f, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -68,6 +69,10 @@ SpriteAtlas:
   - {fileID: -1321987994, guid: 28e0d1229c440f64eac075fd46fe12d7, type: 3}
   - {fileID: 2059931196, guid: 28e0d1229c440f64eac075fd46fe12d7, type: 3}
   - {fileID: 965749634, guid: 28e0d1229c440f64eac075fd46fe12d7, type: 3}
+  - {fileID: 1728414889, guid: 30c6344ef29f2664681c248c3765a92f, type: 3}
+  - {fileID: 1770545054, guid: 30c6344ef29f2664681c248c3765a92f, type: 3}
+  - {fileID: -1324102145, guid: 30c6344ef29f2664681c248c3765a92f, type: 3}
+  - {fileID: -897524147, guid: 30c6344ef29f2664681c248c3765a92f, type: 3}
   m_PackedSpriteNamesToIndex:
   - SPA_Rock_Grass_Water_29
   - SPA_Rock_Grass_Water_28
@@ -99,6 +104,10 @@ SpriteAtlas:
   - SPA_Rock_Grass_Water_6
   - SPA_Rock_Grass_Water_5
   - SPA_Rock_Grass_Water_4
+  - Tiles_3
+  - Tiles_2
+  - Tiles_1
+  - Tiles_0
   m_RenderDataMap: {}
   m_Tag: New Sprite Atlas
   m_IsVariant: 0
