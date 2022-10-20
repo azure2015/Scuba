@@ -17,6 +17,7 @@ public class CollectEffect : MonoBehaviour
 
             em.enabled = true;
             collisionParticleSystem.Play();
+            GetComponent<AudioSource>().Play();
 
             once=false;
             Destroy(sprite);

@@ -7,7 +7,7 @@ using Cinemachine;
 public class Player : MonoBehaviour
 {
     [SerializeField] float steerSpeed = 110f;
-    [SerializeField] float moveSpeed = 3.0f;
+    [SerializeField] float moveSpeed = 6.0f;
     [SerializeField] float rotateSpeed = 90f;
     [SerializeField] GameTimer timerObject;
     //[SerializeField] UIDisplay uiDisplay;

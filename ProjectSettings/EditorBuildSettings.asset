@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level_5.unity
     guid: 04e978df34c11674c89a0a450f16918f
   - enabled: 1
+    path: Assets/Scenes/UpScroll.unity
+    guid: 9c60deb264fb33147bbe3a3a8128f24a
+  - enabled: 1
     path: Assets/Scenes/Level_7.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1

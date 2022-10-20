@@ -50,5 +50,14 @@ public class UIDisplay : MonoBehaviour
         lives.text = $"Lives : {FindObjectOfType<GameSession>().GetLives()}";
     }
 
+    public void EverythingCollectedTrue()
+    {
+        Collected = TotalCollectables;
+        collectables.text = $"Collected : {Collected} / {TotalCollectables}";
+        if(IsEverythingCollected())
+        {
+            FindObjectOfType<NextLevel>().PlayParticle();
+        }
+    }
     
 }
