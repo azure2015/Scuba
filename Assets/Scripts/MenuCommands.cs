@@ -16,6 +16,13 @@ public class MenuCommands : MonoBehaviour
         FindObjectOfType<GameSession>().LoadIntroSession();
     }
 
+     public void ResetMenu()
+    {
+       // Destroy(FindObjectOfType<GameSession>());
+       // SceneManager.LoadScene(0);
+        FindObjectOfType<GameSession>().ResetGameSession();
+    }
+
     public void LoadInstructions()
     {
         SceneManager.LoadScene("Instructions");

@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 
     private Vector2 moveInput;
 
+    private float keyInputBoost = 2.0f;     // when using keyboard move player faster
+
     float endDelay = 2f;
     // Start is called before the first frame update
     void Start()
@@ -87,8 +89,9 @@ public class Player : MonoBehaviour
 
         if(!Touchscreen.current.primaryTouch.press.isPressed)
         {
-            float steerAmount = moveInput.x *steerSpeed * Time.deltaTime;
-            float moveAmount = moveInput.y * moveSpeed * Time.deltaTime;
+            
+            float steerAmount = moveInput.x *steerSpeed * keyInputBoost * Time.deltaTime;
+            float moveAmount = moveInput.y * moveSpeed * keyInputBoost * 2 * Time.deltaTime;
             transform.Rotate(0, 0, -steerAmount);
             transform.Translate( moveAmount,0, 0);
         }
@@ -116,7 +119,7 @@ public class Player : MonoBehaviour
         if(other.gameObject.tag=="Collectable")
         {
             FindObjectOfType<UIDisplay>().ItemCollected();
-        }
+        } 
         
     }
 

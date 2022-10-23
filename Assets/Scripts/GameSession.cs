@@ -44,6 +44,10 @@ public class GameSession : MonoBehaviour
     }
 
 
+    public void  PlayerExtraLife()
+    {
+        playerLives++;
+    }
     public IEnumerator PlayerDeath()
     {
         yield return new WaitForSecondsRealtime(1f);
