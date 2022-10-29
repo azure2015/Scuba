@@ -11,6 +11,8 @@ public class CollectEffect : MonoBehaviour
     {
         if(other.gameObject.tag == "Player" && once) 
         {
+            var boxcCollider2D = GetComponent<BoxCollider2D>();
+            boxcCollider2D.enabled = false;
             var em = collisionParticleSystem.emission;
             var dur = collisionParticleSystem.main.duration;
             collisionParticleSystem.transform.position = sprite.transform.position;
