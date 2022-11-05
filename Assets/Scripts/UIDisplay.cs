@@ -30,6 +30,11 @@ public class UIDisplay : MonoBehaviour
         PlayerLivesUpdate();
     } 
 
+    public void PausedScreen()
+    {
+      //  Get.text = "Pause Stop";
+    }
+
     public void ItemCollected()
     {
         Collected++;

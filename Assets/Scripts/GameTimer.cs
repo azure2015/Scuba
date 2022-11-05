@@ -7,14 +7,17 @@ public class GameTimer : MonoBehaviour
     [SerializeField] float currentTime;
     [SerializeField] public float resetTime;
     [SerializeField] float bonusTime;
-    public bool isActive;
+    public bool isActive = true;
 
     
     // Update is called once per frame
 
     void Update()
     {
-        currentTime -= (Time.deltaTime- bonusTime);
+        if(isActive)
+        {
+            currentTime -= (Time.deltaTime- bonusTime);
+        }
     }
 
     public int GetTimer()
@@ -25,5 +28,10 @@ public class GameTimer : MonoBehaviour
     public void resetTimer()
     {
         currentTime= resetTime;
+    }
+
+    public void TimerControl(bool state)
+    {
+        isActive = state;
     }
 }

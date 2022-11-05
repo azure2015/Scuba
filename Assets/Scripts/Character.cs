@@ -5,20 +5,25 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
 
+    // Class for movement of sprites on the three main screen
+    //     Move object left to right / right to left and scale the sprite
+    //      
+
     SpriteRenderer spriteRenderer;
     Rigidbody2D charRigidbody;
     public int action= 1;
     private float moveSpeed = 3f;
     private bool turn = true;
   
-    // Start is called before the first frame update
+    // Get the component for the sprite and the rigid body
     void Start()
     {
         charRigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
+    // Find the direction and call method.  If action is 1 then the sprite in foreground so move sprite faster and scale up
+    //    If background move sprite slower and scale down.
     void Update()
     {
         if(turn) {rightDirection();}

@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeed = 6.0f;
     [SerializeField] float rotateSpeed = 90f;
     [SerializeField] GameTimer timerObject;
-    //[SerializeField] UIDisplay uiDisplay;
     [SerializeField] List<GameObject> breakingPlayer;
     [SerializeField] CinemachineBrain followCam;
 
@@ -32,6 +31,12 @@ public class Player : MonoBehaviour
     private float keyInputBoost = 2.0f;     // when using keyboard move player faster
 
     float endDelay = 2f;
+
+    float touchTimer = 0f;
+    int countTap;
+
+    bool pauseGame = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,12 +65,51 @@ public class Player : MonoBehaviour
                  FindObjectOfType<GameSession>().PlayerDeath();
             }
         }
+
+         if(Touchscreen.current.primaryTouch.press.isPressed)
+         {
+            
+            countTap = Touchscreen.current.primaryTouch.tapCount.ReadValue();
+            if(countTap >2 && !pauseGame)
+            {
+                Time.timeScale = 0;
+                countTap = 0;
+                pauseGame = true;
+           //     FindObjectOfType<UIDisplay>().PausedScreen();
+            }
+            else if (countTap > 2 && pauseGame)
+            {
+                Time.timeScale = 1;
+                pauseGame = false;
+                countTap = 0;
+            //    FindObjectOfType<UIDisplay>().PausedScreen();
+            } else{
+                countTap = 0;
+            }
+         }
+
+         
+     
     }
 
     void MovePlayer()
     {
+
         if(Touchscreen.current.primaryTouch.press.isPressed)
         {
+            touchTimer += Time.deltaTime;
+            if(touchTimer > 8.0)
+            {
+                transform.Rotate(Vector3.forward,-180);
+                touchTimer = 0;
+            }
+        }
+        else {
+            touchTimer = 0;
+        }
+        if(Touchscreen.current.primaryTouch.press.isPressed)
+        {
+
             movePlayer = true;
             Vector2 touchPosition =Touchscreen.current.primaryTouch.position.ReadValue();
             Vector3 worldPosition = mainCamera.ScreenToWorldPoint(touchPosition);
@@ -121,6 +165,19 @@ public class Player : MonoBehaviour
             FindObjectOfType<UIDisplay>().ItemCollected();
         } 
         
+    }
+
+    void OnTriggerStay2D(Collider2D other) 
+    {
+        if(other.gameObject.tag=="Bubble")
+        {
+            timerObject.TimerControl(false);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other) 
+    {
+        timerObject.TimerControl(true);
     }
 
     public void PlayerDeath()
