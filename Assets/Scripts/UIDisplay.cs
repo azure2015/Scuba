@@ -11,28 +11,29 @@ public class UIDisplay : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI collectables;
     [SerializeField] TextMeshProUGUI lives;
+
+    [SerializeField] TextMeshProUGUI pauseMenu;
     [SerializeField] float resetTime;
 
     private int TotalCollectables;
     private int Collected = 0;
+
     void Start()
     {
         TotalCollectables = GameObject.FindGameObjectsWithTag("Collectable").Length;
         collectables.text = "Collected : " +  " 0 / " + TotalCollectables;
         PlayerLivesUpdate();
         timerSlider.maxValue = resetTime;
-
     }
 
     void Update()
     {
         timerSlider.value = timer.GetTimer();
         PlayerLivesUpdate();
-    } 
-
-    public void PausedScreen()
-    {
-      //  Get.text = "Pause Stop";
+       if(IsEverythingCollected())
+       {
+             collectables.color = new Color32(85,0,255,255);
+       }
     }
 
     public void ItemCollected()

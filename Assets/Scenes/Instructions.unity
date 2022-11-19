@@ -5318,7 +5318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770828461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.06, y: 1.69, z: 0}
+  m_LocalPosition: {x: 0.03, y: 3.09, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10214,7 +10214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793206403}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -1.09, z: 0}
+  m_LocalPosition: {x: -0.09, y: 0.93, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15739,9 +15739,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Instructions\n\nRemove all the nasty plastic bottles from the ocean. 
-    \n\n\nOnce you have collected all the bottles \nreturn to the boat's pick up
-    area.\n\n\nTap left / right of screen to turn and move.\n\n"
+  m_text: "Collect all the polluting  plastic bottles from the ocean.  \n\n\nOnce
+    you have collected all the bottles \nreturn to your boat.\n\nControls\nTap left
+    / right of screen to turn and move.\r\nTap and hold for instant flip of diver.\r\nSwipe
+    Up for pause toggle.\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}

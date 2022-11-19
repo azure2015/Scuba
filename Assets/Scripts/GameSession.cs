@@ -78,6 +78,10 @@ public class GameSession : MonoBehaviour
         SceneManager.LoadScene(currentLevel);
     }
 
+    public int GetCurrentLevel()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
+    }
 
     public void ResetGameSession()
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
-
+using TMPro;
 public class Player : MonoBehaviour
 {
     [SerializeField] float steerSpeed = 110f;
@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] float rotateSpeed = 90f;
     [SerializeField] GameTimer timerObject;
     [SerializeField] List<GameObject> breakingPlayer;
+    [SerializeField] TextMeshProUGUI textInfo;
     [SerializeField] CinemachineBrain followCam;
 
     private Camera mainCamera;
@@ -33,9 +34,15 @@ public class Player : MonoBehaviour
     float endDelay = 2f;
 
     float touchTimer = 0f;
-    int countTap;
+//    float delayTimer = 1f;
+//    int countTap;
 
+    // Variables for pause 
+    float touchStart = 0f;
     bool pauseGame = false;
+ //   bool enabledTimer = false;
+
+    bool touchIsTrue = false;
 
     // Start is called before the first frame update
     void Start()
@@ -66,30 +73,51 @@ public class Player : MonoBehaviour
             }
         }
 
-         if(Touchscreen.current.primaryTouch.press.isPressed)
-         {
-            
-            countTap = Touchscreen.current.primaryTouch.tapCount.ReadValue();
-            if(countTap >2 && !pauseGame)
-            {
-                Time.timeScale = 0;
-                countTap = 0;
-                pauseGame = true;
-           //     FindObjectOfType<UIDisplay>().PausedScreen();
-            }
-            else if (countTap > 2 && pauseGame)
-            {
-                Time.timeScale = 1;
-                pauseGame = false;
-                countTap = 0;
-            //    FindObjectOfType<UIDisplay>().PausedScreen();
-            } else{
-                countTap = 0;
-            }
-         }
+        if(Touchscreen.current.primaryTouch.press.isPressed && !touchIsTrue)
+        {
+             touchStart = GetYPosition();
+            touchIsTrue = true;
+        }
 
-         
-     
+        if(!Touchscreen.current.primaryTouch.press.isPressed && touchIsTrue)
+        {
+            var delta = GetYPosition();
+            delta = Mathf.Abs(delta- touchStart); 
+            if(delta > 5)
+            {
+                pauseGame = !pauseGame;
+                if(pauseGame) SetPause(0,"Paused"); 
+                if(!pauseGame) SetPause(1,"");
+                delta = 0;
+                touchStart = 0;
+                touchIsTrue = false;
+            }
+        }
+
+        if(!Touchscreen.current.primaryTouch.press.isPressed)
+        {
+            touchStart = 0;
+            touchIsTrue = false;
+        }
+    }
+
+    float GetXPosition()
+    {
+        Vector2 touchPosition =Touchscreen.current.primaryTouch.position.ReadValue();
+        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(touchPosition);
+        return (Mathf.Floor(worldPosition.x - transform.position.x));
+    }
+
+    float GetYPosition()
+    {
+        Vector2 touchPosition =Touchscreen.current.primaryTouch.position.ReadValue();
+        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(touchPosition);
+        return (Mathf.Floor(worldPosition.y - transform.position.y));
+    }
+    void SetPause(int timeScale, string pauseText) 
+    {
+        Time.timeScale = timeScale;
+         textInfo.text = pauseText;
     }
 
     void MovePlayer()
@@ -121,8 +149,8 @@ public class Player : MonoBehaviour
             {
                 transform.Rotate(Vector3.back, rotateSpeed * Time.deltaTime);
             }
-
-            else {
+            else 
+            {
                 movementDirection = Vector3.zero;
             }
             
