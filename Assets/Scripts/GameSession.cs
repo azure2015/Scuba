@@ -8,13 +8,14 @@ using UnityEngine.UI;
 public class GameSession : MonoBehaviour
 {
     [SerializeField] int playerLives;
+    
 
     int timerValue;
     int currentLevel;
 
     bool isPlaying = false;
 
-    void Awake()
+    public void Awake()
     {
         int numGameSession = FindObjectsOfType<GameSession>().Length;
         if(numGameSession >1 )
@@ -23,15 +24,9 @@ public class GameSession : MonoBehaviour
         }
         else
         {
- /*            if(!FindObjectOfType<Music>().isActiveAndEnabled)
-            {
-                FindObjectOfType<Music>().PlayMusic();
-            } */
             DontDestroyOnLoad(gameObject);
         }
      
-
-      //  currentLevel = SceneManager.GetActiveScene().buildIndex;
     }
 
     void OnStart() {
@@ -83,6 +78,10 @@ public class GameSession : MonoBehaviour
         return SceneManager.GetActiveScene().buildIndex;
     }
 
+    public void playMusicTrack(int trackNo)
+    {
+
+    }
     public void ResetGameSession()
     {
         SceneManager.LoadScene(0);
