@@ -49,9 +49,6 @@ public class GameSession : MonoBehaviour
         if(playerLives > 1)
         {
             playerLives--;
-         //   int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-         //   SceneManager.LoadScene(currentSceneIndex);
-
             SceneManager.LoadScene(currentLevel);
         }
         else
@@ -92,10 +89,6 @@ public class GameSession : MonoBehaviour
       public void LoadIntroSession()
     {
         SceneManager.LoadScene(0);
-/*         if(!FindObjectOfType<Music>().isActiveAndEnabled)
-        {
-                FindObjectOfType<Music>().PlayMusic();
-        } */
         Destroy(gameObject);
     }
 

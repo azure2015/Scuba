@@ -30,12 +30,8 @@ public class Player : MonoBehaviour
     private Vector2 moveInput;
 
     private float keyInputBoost = 2.0f;     // when using keyboard move player faster
-
     float endDelay = 2f;
-
     float touchTimer = 0f;
-//    float delayTimer = 1f;
-//    int countTap;
 
     // Variables for pause 
     float touchStart = 0f;
